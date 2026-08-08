@@ -11,16 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- Header com contorno + barra de progresso ao rolar ---------- */
-  const header = document.querySelector(".site-header");
+  /* ---------- Barra de progresso ao rolar ---------- */
   const progressFill = document.getElementById("progressFill");
   let scrollTicking = false;
 
   const onScroll = () => {
-    if (header) {
-      if (window.scrollY > 12) header.classList.add("scrolled");
-      else header.classList.remove("scrolled");
-    }
     if (progressFill) {
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const pct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;

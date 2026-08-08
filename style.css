@@ -116,92 +116,41 @@ body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; }
 .fade-in.is-visible { opacity: 1; transform: translateY(0); }
 
 /* ==========================================================================
-   Header
+   Intro (topo da página, sem cabeçalho fixo)
    ========================================================================== */
-.site-header {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-  background: rgba(247, 241, 230, 0.86);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.3s ease;
-}
-.site-header.scrolled { border-bottom-color: var(--color-line); }
-.header-inner { display: flex; align-items: center; justify-content: center; padding: 16px 0; }
-.brand-mark { font-family: var(--font-serif); font-style: italic; font-size: 1.25rem; color: var(--color-ink); }
-
-/* ==========================================================================
-   Hero de vídeo
-   ========================================================================== */
-.hero-video-section { padding: 118px 0 48px; }
-.hero-video-inner { text-align: center; }
+.intro-section { padding: 40px 0 8px; }
 .eyebrow-label {
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-gold);
-  margin-bottom: 14px;
-}
-.hero-title {
-  font-style: italic;
-  font-size: clamp(2.1rem, 7vw, 2.9rem);
-  line-height: 1;
-}
-.hero-title span {
-  display: block;
-  font-family: var(--font-sans);
-  font-style: normal;
-  font-size: 0.62rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--color-terracotta);
-  margin-top: 10px;
 }
 .hero-tagline {
-  margin-top: 14px;
+  margin-top: 12px;
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: var(--color-terracotta);
 }
-
-.video-wrap {
-  margin: 30px auto 0;
-  border-radius: var(--radius-xl);
-  overflow: hidden;
+.store-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--color-cream-soft);
   border: 1px solid var(--color-line);
-  box-shadow: var(--shadow-card);
-  background: var(--color-ink);
+  color: var(--color-ink);
+  font-size: 0.8rem;
+  font-weight: 500;
 }
-.hero-video {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  background: var(--color-ink);
-}
-
-/* variante retrato — vídeo vertical (Reels/Stories) */
-.video-wrap--vertical {
-  max-width: 380px;
-  max-height: 78vh;
-}
-.video-wrap--vertical .hero-video {
-  aspect-ratio: 9 / 16;
-  max-height: 78vh;
-  object-fit: contain;
-}
-
-.hero-sub {
-  margin-top: 20px;
-  color: var(--color-ink-soft);
-  font-size: 0.92rem;
-}
+.store-badge svg { color: var(--color-terracotta); flex: 0 0 auto; }
 
 /* ==========================================================================
    Links principais
    ========================================================================== */
-.links-section { padding: 8px 0 56px; }
+.links-section { padding: 28px 0 8px; }
 
 .link-stack { display: flex; flex-direction: column; }
 .link-row {
@@ -242,6 +191,45 @@ body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; }
   border-radius: 50%;
   background: var(--color-gold);
   vertical-align: middle;
+}
+
+/* ==========================================================================
+   Vídeo
+   ========================================================================== */
+.hero-video-section { padding: 28px 0 56px; }
+.video-hook {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--color-ink);
+  margin-bottom: 18px;
+}
+
+.video-wrap {
+  margin: 0 auto;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-card);
+  background: var(--color-ink);
+}
+.hero-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--color-ink);
+}
+
+/* variante retrato — vídeo vertical (Reels/Stories) */
+.video-wrap--vertical {
+  max-width: 380px;
+  max-height: 78vh;
+}
+.video-wrap--vertical .hero-video {
+  aspect-ratio: 9 / 16;
+  max-height: 78vh;
+  object-fit: contain;
 }
 
 /* ==========================================================================
@@ -324,7 +312,7 @@ body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; }
    Responsivo
    ========================================================================== */
 @media (min-width: 720px) {
-  .hero-video-section { padding-top: 132px; }
+  .intro-section { padding-top: 56px; }
   .link-row { padding: 19px 6px; }
 }
 

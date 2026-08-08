@@ -37,38 +37,17 @@
 <!-- Barra de progresso de leitura -->
 <div class="progress-bar" aria-hidden="true"><span id="progressFill"></span></div>
 
-<!-- ===================== HEADER ===================== -->
-<header class="site-header">
-  <div class="container header-inner">
-    <a href="#topo" class="brand-mark">Encantos</a>
-  </div>
-</header>
-
 <main id="topo">
 
-  <!-- ===================== HERO: VÍDEO ===================== -->
-  <section class="hero-video-section">
-    <div class="container hero-video-inner fade-in">
-      <p class="eyebrow-label center">cama · mesa · banho · almofadas · tapetes</p>
-      <h1 class="hero-title">Encantos<span>Home&amp;Decor</span></h1>
+  <!-- ===================== INTRO ===================== -->
+  <section class="intro-section">
+    <div class="container center fade-in">
+      <p class="eyebrow-label">cama · mesa · banho · almofadas · tapetes</p>
       <p class="hero-tagline">Em cada canto, um encanto ✨</p>
-
-      <div class="video-wrap video-wrap--vertical">
-        <video
-          class="hero-video"
-          controls
-          preload="metadata"
-          playsinline
-          poster="video/poster.jpg"
-        >
-          <!-- poster.jpg é um frame extraído do próprio vídeo — troque por outro
-               frame ou por uma capa desenhada quando quiser -->
-          <source src="video/snapinsta-1786212534136.mp4" type="video/mp4">
-          Seu navegador não é compatível com a reprodução deste vídeo.
-        </video>
-      </div>
-
-      <p class="hero-sub">Loja física em Macaé/RJ e loja online.</p>
+      <p class="store-badge">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.3-7-11.5C5 5.4 8.1 2.5 12 2.5s7 2.9 7 7C19 14.7 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+        Loja física em Macaé, RJ
+      </p>
     </div>
   </section>
 
@@ -128,12 +107,34 @@
     </div>
   </section>
 
+  <!-- ===================== VÍDEO ===================== -->
+  <section class="hero-video-section">
+    <div class="container center fade-in">
+      <p class="video-hook">Assista o vídeo e conheça a loja</p>
+
+      <div class="video-wrap video-wrap--vertical">
+        <video
+          class="hero-video"
+          controls
+          preload="metadata"
+          playsinline
+          poster="video/poster.jpg"
+        >
+          <!-- poster.jpg é um frame extraído do próprio vídeo — troque por outro
+               frame ou por uma capa desenhada quando quiser -->
+          <source src="video/snapinsta-1786212534136.mp4" type="video/mp4">
+          Seu navegador não é compatível com a reprodução deste vídeo.
+        </video>
+      </div>
+    </div>
+  </section>
+
   <!-- ===================== DÚVIDAS (FAQ) ===================== -->
   <!-- CONTEÚDO DE EXEMPLO: revisar/ajustar respostas com a cliente antes de publicar -->
   <section id="duvidas" class="faq-section">
     <div class="container">
-      <p class="section-eyebrow">dúvidas</p>
-      <h2 class="section-title">Perguntas frequentes</h2>
+      <p class="section-eyebrow center">dúvidas</p>
+      <h2 class="section-title center">Perguntas frequentes</h2>
 
       <div class="faq-list fade-in">
         <details class="faq-item">
