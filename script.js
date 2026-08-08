@@ -116,44 +116,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* ---------- Botões magnéticos ---------- */
+  /* ---------- Botões magnéticos (sutil, sem exagero) ---------- */
   if (hasFinePointer && !prefersReducedMotion) {
     document.querySelectorAll(".magnetic").forEach((el) => {
       el.addEventListener("mousemove", (e) => {
         const rect = el.getBoundingClientRect();
         const relX = e.clientX - rect.left - rect.width / 2;
         const relY = e.clientY - rect.top - rect.height / 2;
-        el.style.transform = `translate(${relX * 0.1}px, ${relY * 0.14}px)`;
+        el.style.transform = `translate(${relX * 0.04}px, ${relY * 0.06}px)`;
       });
       el.addEventListener("mouseleave", () => {
         el.style.transform = "translate(0, 0)";
       });
     });
-  }
-
-  /* ---------- Sparkles no CTA do Grupo VIP ---------- */
-  const sparkleSource = document.querySelector(".sparkle-source");
-  if (sparkleSource && hasFinePointer && !prefersReducedMotion) {
-    const spawnSparkles = (x, y) => {
-      const rect = sparkleSource.getBoundingClientRect();
-      const localX = x - rect.left;
-      const localY = y - rect.top;
-      const count = 8;
-      for (let i = 0; i < count; i++) {
-        const s = document.createElement("span");
-        s.className = "sparkle";
-        s.textContent = "✦";
-        const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
-        const distance = 36 + Math.random() * 26;
-        s.style.left = localX + "px";
-        s.style.top = localY + "px";
-        s.style.setProperty("--sx2", Math.cos(angle) * distance + "px");
-        s.style.setProperty("--sy2", Math.sin(angle) * distance + "px");
-        sparkleSource.appendChild(s);
-        s.addEventListener("animationend", () => s.remove());
-      }
-    };
-    sparkleSource.addEventListener("mouseenter", (e) => spawnSparkles(e.clientX, e.clientY));
   }
 
   /* ---------- Contadores animados (estatísticas) ---------- */
