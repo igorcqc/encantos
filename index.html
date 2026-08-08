@@ -30,17 +30,24 @@
 </head>
 <body>
 
+<!-- Cursor customizado (desktop) -->
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<!-- Barra de progresso de leitura -->
+<div class="progress-bar" aria-hidden="true"><span id="progressFill"></span></div>
+
 <!-- ===================== HEADER / NAV ===================== -->
 <header class="site-header">
   <div class="container header-inner">
-    <span class="brand-mark">Encantos</span>
+    <a href="#topo" class="brand-mark">Encantos</a>
     <a href="#destinos" class="btn btn-mini">Nossos links</a>
   </div>
 </header>
 
 <!-- ===================== HERO ===================== -->
-<section class="hero">
-  <!-- TROCAR PELA FOTO REAL DO PRODUTO -->
+<section id="topo" class="hero">
+  <!-- TROCAR PELA FOTO REAL DO AMBIENTE -->
   <img
     class="hero-bg"
     src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1600&auto=format&fit=crop"
@@ -48,85 +55,155 @@
     loading="eager"
   >
   <div class="hero-overlay"></div>
+
+  <!-- formas decorativas com parallax de mouse -->
+  <div class="floaties" aria-hidden="true">
+    <svg class="float-shape" data-depth="18" style="--x:8%; --y:22%;" width="46" height="46" viewBox="0 0 46 46" fill="none"><path d="M23 4c3 6 7 10 13 13-6 3-10 7-13 13-3-6-7-10-13-13 6-3 10-7 13-13Z" fill="#c79a4b" opacity=".55"/></svg>
+    <svg class="float-shape" data-depth="34" style="--x:85%; --y:16%;" width="34" height="34" viewBox="0 0 34 34" fill="none"><circle cx="17" cy="17" r="3.4" fill="#faf3ea" opacity=".7"/><circle cx="6" cy="10" r="2" fill="#faf3ea" opacity=".5"/><circle cx="28" cy="9" r="2.4" fill="#faf3ea" opacity=".5"/></svg>
+    <svg class="float-shape" data-depth="10" style="--x:14%; --y:74%;" width="60" height="60" viewBox="0 0 60 60" fill="none"><path d="M30 6C22 18 10 22 4 24c8 4 14 12 16 24 2-12 8-20 16-24-10-2-20-8-6-18Z" fill="#8a9a7e" opacity=".4"/></svg>
+    <svg class="float-shape" data-depth="26" style="--x:90%; --y:70%;" width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M20 4c8 4 12 8 16 16-8 4-12 8-16 16-4-8-8-12-16-16 8-4 12-8 16-16Z" fill="#c17451" opacity=".5"/></svg>
+  </div>
+
   <div class="container hero-content fade-in">
     <p class="eyebrow">Cama · Mesa · Banho · Almofadas · Tapetes</p>
     <h1 class="hero-title">Encantos<span class="hero-title-sub">Home&amp;Decor</span></h1>
-    <p class="hero-tagline">Em cada canto, um encanto ✨</p>
+    <p class="hero-tagline shimmer-text">Em cada canto, um encanto ✨</p>
     <p class="hero-desc">Loja física em Macaé/RJ e loja online — peças que transformam sua casa em um refúgio cheio de charme.</p>
-    <a href="#destinos" class="btn btn-primary">Ver todos os nossos links</a>
+    <a href="#destinos" class="btn btn-primary magnetic">Ver todos os nossos links</a>
   </div>
   <a href="#vitrine" class="scroll-cue" aria-label="Rolar para baixo">
     <span></span>
   </a>
 </section>
 
+<!-- ===================== NAV DE CATEGORIAS (sticky) ===================== -->
+<nav class="cat-nav" aria-label="Categorias de produto">
+  <div class="cat-nav-track">
+    <button class="cat-pill" data-target="cat-cama" type="button">🛏️ Cama</button>
+    <button class="cat-pill" data-target="cat-mesa" type="button">🍽️ Mesa</button>
+    <button class="cat-pill" data-target="cat-banho" type="button">🛁 Banho</button>
+    <button class="cat-pill" data-target="cat-almofadas" type="button">🧵 Almofadas</button>
+    <button class="cat-pill" data-target="cat-tapetes" type="button">🧶 Tapetes</button>
+  </div>
+</nav>
+
 <!-- ===================== VITRINE DE PRODUTOS ===================== -->
 <section id="vitrine" class="showcase">
   <div class="container">
     <p class="section-eyebrow fade-in">nossas categorias</p>
     <h2 class="section-title fade-in">Um cantinho pra cada encanto</h2>
-    <p class="section-desc fade-in">Explore as linhas que a gente mais ama vestir em cada casa.</p>
+    <p class="section-desc fade-in">Toque em cada cartão pra conhecer um pouquinho mais. Explore as linhas que a gente mais ama vestir em cada casa.</p>
 
     <div class="showcase-grid">
 
-      <article class="product-card fade-in">
-        <div class="product-img-wrap">
-          <!-- TROCAR PELA FOTO REAL DO PRODUTO -->
-          <img
-            src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=800&auto=format&fit=crop"
-            alt="Cama de casal com roupa de cama em tons neutros e almofadas decorativas"
-            loading="lazy"
-          >
+      <article id="cat-cama" class="product-card tone-1 fade-in" tabindex="0">
+        <div class="flip-inner">
+          <div class="flip-face flip-front">
+            <span class="spotlight"></span>
+            <!-- TROCAR PELA FOTO REAL DO PRODUTO -->
+            <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=800&auto=format&fit=crop" alt="Cama de casal com roupa de cama em tons neutros e almofadas decorativas" loading="lazy">
+            <div class="product-label">
+              <h3>Cama</h3>
+              <span class="tap-hint">toque para descobrir ✦</span>
+            </div>
+          </div>
+          <div class="flip-face flip-back">
+            <h3>Cama</h3>
+            <p>Roupas de cama e edredons que são um convite pra uma noite mais gostosa. Texturas macias, estampas delicadas, aconchego em cada dobra.</p>
+            <div class="tags">
+              <span>Conforto todas as noites</span>
+              <span>Estampas delicadas</span>
+            </div>
+          </div>
         </div>
-        <h3>Cama</h3>
       </article>
 
-      <article class="product-card fade-in">
-        <div class="product-img-wrap">
-          <!-- TROCAR PELA FOTO REAL DO PRODUTO -->
-          <img
-            src="https://images.unsplash.com/photo-1600891964092-4316c288032e?q=80&w=800&auto=format&fit=crop"
-            alt="Mesa posta decorada com jogo americano, guardanapos e louças em tons terrosos"
-            loading="lazy"
-          >
+      <article id="cat-mesa" class="product-card tone-2 fade-in" tabindex="0">
+        <div class="flip-inner">
+          <div class="flip-face flip-front">
+            <span class="spotlight"></span>
+            <!-- TROCAR PELA FOTO REAL DO PRODUTO -->
+            <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?q=80&w=800&auto=format&fit=crop" alt="Mesa posta decorada com jogo americano, guardanapos e louças em tons terrosos" loading="lazy">
+            <div class="product-label">
+              <h3>Mesa</h3>
+              <span class="tap-hint">toque para descobrir ✦</span>
+            </div>
+          </div>
+          <div class="flip-face flip-back">
+            <h3>Mesa</h3>
+            <p>Toalhas, jogos americanos e guardanapos que transformam qualquer refeição em celebração. Porque toda mesa merece um toque especial.</p>
+            <div class="tags">
+              <span>Toques de charme</span>
+              <span>Para ocasiões especiais</span>
+            </div>
+          </div>
         </div>
-        <h3>Mesa</h3>
       </article>
 
-      <article class="product-card fade-in">
-        <div class="product-img-wrap">
-          <!-- TROCAR PELA FOTO REAL DO PRODUTO -->
-          <img
-            src="https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=800&auto=format&fit=crop"
-            alt="Toalhas de banho dobradas em tons neutros sobre superfície de banheiro"
-            loading="lazy"
-          >
+      <article id="cat-banho" class="product-card tone-3 fade-in" tabindex="0">
+        <div class="flip-inner">
+          <div class="flip-face flip-front">
+            <span class="spotlight"></span>
+            <!-- TROCAR PELA FOTO REAL DO PRODUTO -->
+            <img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=800&auto=format&fit=crop" alt="Toalhas de banho dobradas em tons neutros sobre superfície de banheiro" loading="lazy">
+            <div class="product-label">
+              <h3>Banho</h3>
+              <span class="tap-hint">toque para descobrir ✦</span>
+            </div>
+          </div>
+          <div class="flip-face flip-back">
+            <h3>Banho</h3>
+            <p>Toalhas fofinhas e conjuntos de banho que viram spa dentro de casa. Um mergulho de conforto em cada detalhe, todos os dias.</p>
+            <div class="tags">
+              <span>Maciez todos os dias</span>
+              <span>Spa em casa</span>
+            </div>
+          </div>
         </div>
-        <h3>Banho</h3>
       </article>
 
-      <article class="product-card fade-in">
-        <div class="product-img-wrap">
-          <!-- TROCAR PELA FOTO REAL DO PRODUTO -->
-          <img
-            src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e6?q=80&w=800&auto=format&fit=crop"
-            alt="Almofadas decorativas em tons quentes sobre sofá"
-            loading="lazy"
-          >
+      <article id="cat-almofadas" class="product-card tone-4 fade-in" tabindex="0">
+        <div class="flip-inner">
+          <div class="flip-face flip-front">
+            <span class="spotlight"></span>
+            <!-- TROCAR PELA FOTO REAL DO PRODUTO -->
+            <img src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e6?q=80&w=800&auto=format&fit=crop" alt="Almofadas decorativas em tons quentes sobre sofá" loading="lazy">
+            <div class="product-label">
+              <h3>Almofadas</h3>
+              <span class="tap-hint">toque para descobrir ✦</span>
+            </div>
+          </div>
+          <div class="flip-face flip-back">
+            <h3>Almofadas</h3>
+            <p>O toque final que muda tudo. Estampas, texturas e cores pra você compor o cantinho com a sua cara — e trocar sempre que der vontade.</p>
+            <div class="tags">
+              <span>Combine com tudo</span>
+              <span>Seu estilo, seu cantinho</span>
+            </div>
+          </div>
         </div>
-        <h3>Almofadas</h3>
       </article>
 
-      <article class="product-card fade-in">
-        <div class="product-img-wrap">
-          <!-- TROCAR PELA FOTO REAL DO PRODUTO -->
-          <img
-            src="https://images.unsplash.com/photo-1600166898405-da9535204843?q=80&w=800&auto=format&fit=crop"
-            alt="Tapete texturizado em tons neutros decorando uma sala de estar"
-            loading="lazy"
-          >
+      <article id="cat-tapetes" class="product-card tone-5 fade-in" tabindex="0">
+        <div class="flip-inner">
+          <div class="flip-face flip-front">
+            <span class="spotlight"></span>
+            <!-- TROCAR PELA FOTO REAL DO PRODUTO -->
+            <img src="https://images.unsplash.com/photo-1600166898405-da9535204843?q=80&w=800&auto=format&fit=crop" alt="Tapete texturizado em tons neutros decorando uma sala de estar" loading="lazy">
+            <div class="product-label">
+              <h3>Tapetes</h3>
+              <span class="tap-hint">toque para descobrir ✦</span>
+            </div>
+          </div>
+          <div class="flip-face flip-back">
+            <h3>Tapetes</h3>
+            <p>Aquele detalhe que aquece o ambiente — literalmente. Do quarto à sala, um tapete pra cada estilo de encanto.</p>
+            <div class="tags">
+              <span>Aquece o ambiente</span>
+              <span>Do quarto à sala</span>
+            </div>
+          </div>
         </div>
-        <h3>Tapetes</h3>
       </article>
 
     </div>
@@ -144,16 +221,25 @@
         Prefere resolver tudo do sofá de casa? A gente leva até você. Dos dois jeitos, com todo o carinho de sempre.
       </p>
     </div>
-    <div class="dual-store-badges fade-in">
-      <div class="badge-card">
+
+    <div class="store-switch fade-in" role="tablist" aria-label="Como você prefere comprar">
+      <div class="switch-track">
+        <button class="switch-btn is-active" role="tab" aria-selected="true" data-pane="fisica" type="button">🏬 Física</button>
+        <button class="switch-btn" role="tab" aria-selected="false" data-pane="online" type="button">🛒 Online</button>
+        <span class="switch-thumb" aria-hidden="true"></span>
+      </div>
+
+      <div class="switch-pane is-active" id="pane-fisica" role="tabpanel">
         <span class="badge-icon">🏬</span>
         <h3>Loja Física</h3>
-        <p>Macaé/RJ</p>
+        <p>Macaé/RJ — venha sentir de perto cada tecido e cada estampa.</p>
+        <a href="[LINK_GOOGLE_MAPS]" target="_blank" rel="noopener" class="pane-link">Ver localização →</a>
       </div>
-      <div class="badge-card">
+      <div class="switch-pane" id="pane-online" role="tabpanel" hidden>
         <span class="badge-icon">🛒</span>
         <h3>Loja Online</h3>
-        <p>Atendimento pelo WhatsApp</p>
+        <p>Atendimento e pedidos direto pelo WhatsApp, de onde você estiver.</p>
+        <a href="[LINK_WHATSAPP_DIRETO]" target="_blank" rel="noopener" class="pane-link">Chamar no WhatsApp →</a>
       </div>
     </div>
   </div>
@@ -168,7 +254,7 @@
     <div class="destinos-grid">
 
       <!-- CTA principal: Grupo VIP WhatsApp -->
-      <a href="[LINK_GRUPO_WHATSAPP]" target="_blank" rel="noopener" class="cta-card cta-vip fade-in">
+      <a href="[LINK_GRUPO_WHATSAPP]" target="_blank" rel="noopener" class="cta-card cta-vip fade-in magnetic sparkle-source">
         <span class="cta-icon">🎁</span>
         <span class="cta-tag">mais procurado</span>
         <h3>Grupo VIP no WhatsApp</h3>
@@ -176,21 +262,21 @@
         <span class="cta-arrow">Quero entrar →</span>
       </a>
 
-      <a href="[LINK_GOOGLE_MAPS]" target="_blank" rel="noopener" class="cta-card fade-in">
+      <a href="[LINK_GOOGLE_MAPS]" target="_blank" rel="noopener" class="cta-card fade-in magnetic">
         <span class="cta-icon">📍</span>
         <h3>Nossa loja física</h3>
         <p>Veja como chegar até a Encantos em Macaé/RJ.</p>
         <span class="cta-arrow">Ver no mapa →</span>
       </a>
 
-      <a href="[LINK_WHATSAPP_DIRETO]" target="_blank" rel="noopener" class="cta-card fade-in">
+      <a href="[LINK_WHATSAPP_DIRETO]" target="_blank" rel="noopener" class="cta-card fade-in magnetic">
         <span class="cta-icon">💬</span>
         <h3>Fale conosco</h3>
         <p>Dúvidas, pedidos ou atendimento personalizado direto no WhatsApp.</p>
         <span class="cta-arrow">Chamar no WhatsApp →</span>
       </a>
 
-      <a href="[LINK_INSTAGRAM]" target="_blank" rel="noopener" class="cta-card fade-in">
+      <a href="[LINK_INSTAGRAM]" target="_blank" rel="noopener" class="cta-card fade-in magnetic">
         <span class="cta-icon">📷</span>
         <h3>Instagram</h3>
         <p>Siga @encantosdecorr e acompanhe as novidades por lá.</p>
