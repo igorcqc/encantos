@@ -1,24 +1,40 @@
 # Encantos Home&Decor — Landing Page
 
-Página única (one-page), estilo linktree, extremamente interativa: vitrine
-de produtos com cartões que viram ao toque, cursor customizado, parallax,
-sparkles no CTA principal e mais — substituindo o link da bio do Instagram
-(@encantosdecorr).
+Página única (one-page) no formato "cartão de perfil" (estilo linktree
+premium): foto grande + pilha de links principais numa coluna, e do outro
+lado quem somos, categorias de produto, dúvidas frequentes e estatísticas —
+substituindo o link da bio do Instagram (@encantosdecorr).
+
+## Estrutura
+
+1. **Cartão da loja** (coluna fixa/sticky no desktop): foto, nome, pilha de
+   4 links principais (Grupo VIP, Loja física, Fale conosco, Instagram) e
+   mini estatísticas
+2. **Quote** de abertura + foto grande de ambiente
+3. **Quem somos** — texto sobre a loja + CTA para as categorias
+4. **Nossas categorias** — cartões com flip 3D (Cama, Mesa, Banho,
+   Almofadas, Tapetes)
+5. **Dúvidas frequentes** — acordeão nativo (`<details>`)
+6. **Faixa de estatísticas**
+7. **Faixa de fechamento** — CTA final, redes sociais e assinatura
 
 ## Destaques interativos
 
-- **Cartões de produto com flip 3D**: toque/clique em cada categoria (Cama,
-  Mesa, Banho, Almofadas, Tapetes) para virar o cartão e revelar a
-  descrição e as tags da linha
+- **Cartões de produto com flip 3D**: toque/clique em cada categoria para
+  virar o cartão e revelar a descrição e as tags da linha
 - **Spotlight**: brilho que segue o cursor sobre os cartões (desktop)
 - **Cursor customizado** com anel que reage ao passar sobre links e cartões
-- **Parallax** nas formas decorativas do Hero e na imagem de fundo
-- **Nav de categorias** sticky com scroll-spy (destaca a categoria visível)
-- **Toggle Loja Física / Online** animado
-- **Botões magnéticos** nos CTAs principais
-- **Sparkles** ao passar o mouse no CTA do Grupo VIP
+- **Botões magnéticos** nos links e CTAs principais
+- **Sparkles** ao passar o mouse no link do Grupo VIP
+- **Contadores animados** nas estatísticas (sobem ao entrar na tela)
 - **Barra de progresso** de leitura no topo
 - Tudo respeita `prefers-reduced-motion` e degrada bem em touch/mobile
+
+## Atenção: conteúdo de exemplo
+
+As respostas da seção **Dúvidas frequentes** foram escritas como sugestão
+de tom de voz — revise/ajuste com a cliente antes de publicar (prazos de
+entrega, política de troca etc. podem variar).
 
 ## Stack
 
