@@ -1,7 +1,24 @@
 # Encantos Home&Decor — Landing Page
 
-Página única (one-page) que funciona como vitrine de produtos + hub de links,
-substituindo o link da bio do Instagram (@encantosdecorr).
+Página única (one-page), estilo linktree, extremamente interativa: vitrine
+de produtos com cartões que viram ao toque, cursor customizado, parallax,
+sparkles no CTA principal e mais — substituindo o link da bio do Instagram
+(@encantosdecorr).
+
+## Destaques interativos
+
+- **Cartões de produto com flip 3D**: toque/clique em cada categoria (Cama,
+  Mesa, Banho, Almofadas, Tapetes) para virar o cartão e revelar a
+  descrição e as tags da linha
+- **Spotlight**: brilho que segue o cursor sobre os cartões (desktop)
+- **Cursor customizado** com anel que reage ao passar sobre links e cartões
+- **Parallax** nas formas decorativas do Hero e na imagem de fundo
+- **Nav de categorias** sticky com scroll-spy (destaca a categoria visível)
+- **Toggle Loja Física / Online** animado
+- **Botões magnéticos** nos CTAs principais
+- **Sparkles** ao passar o mouse no CTA do Grupo VIP
+- **Barra de progresso** de leitura no topo
+- Tudo respeita `prefers-reduced-motion` e degrada bem em touch/mobile
 
 ## Stack
 
