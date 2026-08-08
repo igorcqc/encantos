@@ -54,54 +54,11 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
     );
     faders.forEach((el) => fadeObserver.observe(el));
   } else {
     faders.forEach((el) => el.classList.add("is-visible"));
-  }
-
-  /* ---------- Parallax suave na imagem do hero ---------- */
-  const heroBg = document.querySelector(".hero-bg");
-  if (heroBg && !prefersReducedMotion) {
-    let bgTicking = false;
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (!bgTicking) {
-          window.requestAnimationFrame(() => {
-            const offset = window.scrollY * 0.25;
-            heroBg.style.transform = `translateY(${offset}px) scale(1.08)`;
-            bgTicking = false;
-          });
-          bgTicking = true;
-        }
-      },
-      { passive: true }
-    );
-  }
-
-  /* ---------- Parallax das formas flutuantes no hero (mousemove) ---------- */
-  const hero = document.querySelector(".hero");
-  const floatShapes = document.querySelectorAll(".float-shape");
-  if (hero && floatShapes.length && hasFinePointer && !prefersReducedMotion) {
-    let moveTicking = false;
-    let lastX = 0.5, lastY = 0.5;
-    hero.addEventListener("mousemove", (e) => {
-      const rect = hero.getBoundingClientRect();
-      lastX = (e.clientX - rect.left) / rect.width - 0.5;
-      lastY = (e.clientY - rect.top) / rect.height - 0.5;
-      if (!moveTicking) {
-        window.requestAnimationFrame(() => {
-          floatShapes.forEach((shape) => {
-            const depth = parseFloat(shape.dataset.depth) || 20;
-            shape.style.transform = `translate(${lastX * depth}px, ${lastY * depth}px)`;
-          });
-          moveTicking = false;
-        });
-        moveTicking = true;
-      }
-    });
   }
 
   /* ---------- Cursor customizado ---------- */
@@ -127,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     animateRing();
 
-    const hoverTargets = document.querySelectorAll("a, button, .product-card");
+    const hoverTargets = document.querySelectorAll("a, button, .product-card, summary");
     hoverTargets.forEach((el) => {
       el.addEventListener("mouseenter", () => cursorRing.classList.add("is-active"));
       el.addEventListener("mouseleave", () => cursorRing.classList.remove("is-active"));
@@ -159,56 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* ---------- Nav de categorias: scroll-to + scroll-spy ---------- */
-  const pills = document.querySelectorAll(".cat-pill");
-  pills.forEach((pill) => {
-    pill.addEventListener("click", () => {
-      const target = document.getElementById(pill.dataset.target);
-      if (target) {
-        target.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "center", inline: "center" });
-      }
-    });
-  });
-
-  if ("IntersectionObserver" in window && productCards.length) {
-    const spyObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const pill = document.querySelector(`.cat-pill[data-target="${entry.target.id}"]`);
-          if (!pill) return;
-          if (entry.isIntersecting) {
-            pills.forEach((p) => p.classList.remove("is-active"));
-            pill.classList.add("is-active");
-          }
-        });
-      },
-      { threshold: 0.55 }
-    );
-    productCards.forEach((card) => spyObserver.observe(card));
-  }
-
-  /* ---------- Toggle Loja Física / Online ---------- */
-  const storeSwitch = document.querySelector(".store-switch");
-  if (storeSwitch) {
-    const switchBtns = storeSwitch.querySelectorAll(".switch-btn");
-    const panes = storeSwitch.querySelectorAll(".switch-pane");
-    switchBtns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const pane = btn.dataset.pane;
-        storeSwitch.dataset.active = pane;
-        switchBtns.forEach((b) => {
-          b.classList.toggle("is-active", b === btn);
-          b.setAttribute("aria-selected", b === btn ? "true" : "false");
-        });
-        panes.forEach((p) => {
-          const match = p.id === `pane-${pane}`;
-          p.classList.toggle("is-active", match);
-          p.hidden = !match;
-        });
-      });
-    });
-  }
-
   /* ---------- Botões magnéticos ---------- */
   if (hasFinePointer && !prefersReducedMotion) {
     document.querySelectorAll(".magnetic").forEach((el) => {
@@ -216,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const rect = el.getBoundingClientRect();
         const relX = e.clientX - rect.left - rect.width / 2;
         const relY = e.clientY - rect.top - rect.height / 2;
-        el.style.transform = `translate(${relX * 0.12}px, ${relY * 0.18}px)`;
+        el.style.transform = `translate(${relX * 0.1}px, ${relY * 0.14}px)`;
       });
       el.addEventListener("mouseleave", () => {
         el.style.transform = "translate(0, 0)";
@@ -237,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
         s.className = "sparkle";
         s.textContent = "✦";
         const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
-        const distance = 40 + Math.random() * 30;
+        const distance = 36 + Math.random() * 26;
         s.style.left = localX + "px";
         s.style.top = localY + "px";
         s.style.setProperty("--sx2", Math.cos(angle) * distance + "px");
@@ -247,5 +154,42 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
     sparkleSource.addEventListener("mouseenter", (e) => spawnSparkles(e.clientX, e.clientY));
+  }
+
+  /* ---------- Contadores animados (estatísticas) ---------- */
+  const counters = document.querySelectorAll(".count[data-count]");
+  const animateCount = (el) => {
+    const target = parseFloat(el.dataset.count) || 0;
+    const suffix = el.dataset.suffix || "";
+    if (prefersReducedMotion) {
+      el.textContent = target + suffix;
+      return;
+    }
+    const duration = 1100;
+    const start = performance.now();
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (progress < 1) window.requestAnimationFrame(step);
+    };
+    window.requestAnimationFrame(step);
+  };
+
+  if ("IntersectionObserver" in window && counters.length) {
+    const countObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCount(entry.target);
+            countObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.6 }
+    );
+    counters.forEach((el) => countObserver.observe(el));
+  } else {
+    counters.forEach((el) => animateCount(el));
   }
 });
