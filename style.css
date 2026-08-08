@@ -181,6 +181,17 @@ body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; }
   background: var(--color-ink);
 }
 
+/* variante retrato — vídeo vertical (Reels/Stories) */
+.video-wrap--vertical {
+  max-width: 380px;
+  max-height: 78vh;
+}
+.video-wrap--vertical .hero-video {
+  aspect-ratio: 9 / 16;
+  max-height: 78vh;
+  object-fit: contain;
+}
+
 .hero-sub {
   margin-top: 20px;
   color: var(--color-ink-soft);

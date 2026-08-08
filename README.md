@@ -13,20 +13,15 @@ Negócio — sem depender de contexto extra.
 3. **Dúvidas frequentes** — acordeão nativo (`<details>`)
 4. **Fechamento** — CTA final, redes sociais e assinatura
 
-## Subindo o vídeo institucional
+## Vídeo institucional
 
-Veja `video/README.md` para o passo a passo. Resumo: suba o arquivo como
+O vídeo já está em `video/snapinsta-1786212534136.mp4` (vertical, 9:16 —
+formato Reels/Stories) e o player em `index.html`/`style.css` está
+ajustado pro formato retrato. Veja `video/README.md` para trocar por
+outro arquivo depois.
 
-```
-video/institucional.mp4
-```
-
-O `<video>` em `index.html` já aponta para esse caminho — não precisa
-mexer em mais nada depois de subir o arquivo com esse nome.
-
-Enquanto o vídeo real não estiver no ar, uma imagem de capa (placeholder)
-aparece no lugar — marcada com o comentário `TROCAR PELA IMAGEM DE CAPA DO
-VÍDEO` em `index.html`.
+A imagem de capa (`poster`) que aparece antes do play está marcada com o
+comentário `TROCAR PELA IMAGEM DE CAPA DO VÍDEO` em `index.html`.
 
 ## Antes de publicar: preencher os placeholders
 
