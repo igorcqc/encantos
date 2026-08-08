@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- Header com sombra + barra de progresso ao rolar ---------- */
+  /* ---------- Header com contorno + barra de progresso ao rolar ---------- */
   const header = document.querySelector(".site-header");
   const progressFill = document.getElementById("progressFill");
   let scrollTicking = false;
@@ -84,37 +84,12 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     animateRing();
 
-    const hoverTargets = document.querySelectorAll("a, button, .product-card, summary");
+    const hoverTargets = document.querySelectorAll("a, button, summary");
     hoverTargets.forEach((el) => {
       el.addEventListener("mouseenter", () => cursorRing.classList.add("is-active"));
       el.addEventListener("mouseleave", () => cursorRing.classList.remove("is-active"));
     });
   }
-
-  /* ---------- Cartões de produto: flip + spotlight ---------- */
-  const productCards = document.querySelectorAll(".product-card");
-  productCards.forEach((card) => {
-    const spotlight = card.querySelector(".spotlight");
-
-    const toggleFlip = () => card.classList.toggle("is-flipped");
-    card.addEventListener("click", toggleFlip);
-    card.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        toggleFlip();
-      }
-    });
-
-    if (spotlight && hasFinePointer && !prefersReducedMotion) {
-      card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
-        const sx = ((e.clientX - rect.left) / rect.width) * 100;
-        const sy = ((e.clientY - rect.top) / rect.height) * 100;
-        spotlight.style.setProperty("--sx", sx + "%");
-        spotlight.style.setProperty("--sy", sy + "%");
-      });
-    }
-  });
 
   /* ---------- Botões magnéticos (sutil, sem exagero) ---------- */
   if (hasFinePointer && !prefersReducedMotion) {
@@ -129,42 +104,5 @@ document.addEventListener("DOMContentLoaded", () => {
         el.style.transform = "translate(0, 0)";
       });
     });
-  }
-
-  /* ---------- Contadores animados (estatísticas) ---------- */
-  const counters = document.querySelectorAll(".count[data-count]");
-  const animateCount = (el) => {
-    const target = parseFloat(el.dataset.count) || 0;
-    const suffix = el.dataset.suffix || "";
-    if (prefersReducedMotion) {
-      el.textContent = target + suffix;
-      return;
-    }
-    const duration = 1100;
-    const start = performance.now();
-    const step = (now) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(target * eased) + suffix;
-      if (progress < 1) window.requestAnimationFrame(step);
-    };
-    window.requestAnimationFrame(step);
-  };
-
-  if ("IntersectionObserver" in window && counters.length) {
-    const countObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            animateCount(entry.target);
-            countObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.6 }
-    );
-    counters.forEach((el) => countObserver.observe(el));
-  } else {
-    counters.forEach((el) => animateCount(el));
   }
 });

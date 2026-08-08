@@ -1,60 +1,32 @@
 # Encantos Home&Decor — Landing Page
 
-Página única (one-page) no formato "cartão de perfil" (estilo linktree
-premium): foto grande + pilha de links principais numa coluna, e do outro
-lado quem somos, categorias de produto, dúvidas frequentes e estatísticas —
-substituindo o link da bio do Instagram (@encantosdecorr).
+Página única (one-page), objetiva por design: vídeo institucional no topo,
+botões de link logo abaixo e direto para as dúvidas frequentes. Pensada
+para funcionar como página "coringa" — link da bio, anúncios, Google Meu
+Negócio — sem depender de contexto extra.
 
 ## Estrutura
 
-1. **Cartão da loja** (coluna fixa/sticky no desktop): foto, nome, pilha de
-   4 links principais (Grupo VIP, Loja física, Fale conosco, Instagram) e
-   mini estatísticas
-2. **Quote** de abertura + foto grande de ambiente
-3. **Quem somos** — texto sobre a loja + CTA para as categorias
-4. **Nossas categorias** — cartões com flip 3D (Cama, Mesa, Banho,
-   Almofadas, Tapetes)
-5. **Dúvidas frequentes** — acordeão nativo (`<details>`)
-6. **Faixa de estatísticas**
-7. **Faixa de fechamento** — CTA final, redes sociais e assinatura
+1. **Vídeo institucional** — hero com player nativo (controles do próprio
+   navegador, sem autoplay forçado)
+2. **Links principais** — Grupo VIP, Loja física, Fale conosco, Instagram
+3. **Dúvidas frequentes** — acordeão nativo (`<details>`)
+4. **Fechamento** — CTA final, redes sociais e assinatura
 
-## Direção visual
+## Subindo o vídeo institucional
 
-Sóbria e editorial, no espírito de uma marca boutique de decoração: tons
-terracota/creme silenciosos, tipografia serif (Fraunces) para títulos,
-ícones de linha finos (sem emoji), fotos com um leve tratamento de cor
-unificado, textura de papel muito sutil no fundo e nada de gradientes
-berrantes ou efeitos piscantes — a interatividade é discreta, não é o
-protagonista.
+Veja `video/README.md` para o passo a passo. Resumo: suba o arquivo como
 
-## Destaques interativos
+```
+video/institucional.mp4
+```
 
-- **Cartões de produto com flip**: toque/clique em cada categoria para
-  virar o cartão e revelar a descrição, o ícone e as tags da linha
-- **Spotlight**: brilho sutil que segue o cursor sobre os cartões (desktop)
-- **Cursor customizado** discreto, com anel fino que reage sobre links
-- **Botões magnéticos** bem sutis nos links e CTAs principais
-- **Contadores animados** nas estatísticas (sobem ao entrar na tela)
-- **Barra de progresso** de leitura no topo
-- Tudo respeita `prefers-reduced-motion` e degrada bem em touch/mobile
+O `<video>` em `index.html` já aponta para esse caminho — não precisa
+mexer em mais nada depois de subir o arquivo com esse nome.
 
-## Atenção: conteúdo de exemplo
-
-As respostas da seção **Dúvidas frequentes** foram escritas como sugestão
-de tom de voz — revise/ajuste com a cliente antes de publicar (prazos de
-entrega, política de troca etc. podem variar).
-
-## Stack
-
-HTML, CSS e JavaScript puro — sem build, sem framework. Pronta para publicar
-direto na Vercel (ou qualquer host de arquivos estáticos).
-
-## Estrutura
-
-- `index.html` — marcação da página
-- `style.css` — estilos e variáveis de marca (cores, fontes)
-- `script.js` — fade-in no scroll, parallax leve no hero, ano dinâmico no rodapé
-- `vercel.json` — configuração mínima de deploy
+Enquanto o vídeo real não estiver no ar, uma imagem de capa (placeholder)
+aparece no lugar — marcada com o comentário `TROCAR PELA IMAGEM DE CAPA DO
+VÍDEO` em `index.html`.
 
 ## Antes de publicar: preencher os placeholders
 
@@ -67,25 +39,26 @@ Busque por estes marcadores em `index.html` e substitua pelos links reais:
 | `[LINK_GOOGLE_MAPS]` | Localização da loja física em Macaé/RJ |
 | `[LINK_INSTAGRAM]` | `https://www.instagram.com/encantosdecorr/` |
 
-## Trocar as fotos dos produtos
+## Atenção: conteúdo de exemplo
 
-As 5 imagens da seção "Vitrine de produtos" são placeholders de banco de
-imagens (Unsplash), marcados no código com o comentário:
+As respostas da seção **Dúvidas frequentes** foram escritas como sugestão
+de tom de voz — revise/ajuste com a cliente antes de publicar (prazos de
+entrega, política de troca etc. podem variar).
 
-```html
-<!-- TROCAR PELA FOTO REAL DO PRODUTO -->
-```
+## Direção visual
 
-Basta trocar o `src` de cada `<img>` pela foto real do produto quando
-estiver disponível. A imagem de fundo do Hero também está marcada da mesma
-forma.
+Sóbria e editorial: tons terracota/creme, tipografia serif (Fraunces) nos
+títulos, ícones de linha finos, textura de papel muito sutil no fundo.
+Paleta centralizada em variáveis CSS no topo de `style.css` (bloco
+`:root`) — fácil de ajustar quando a identidade final estiver fechada.
 
-## Paleta de cores
+## Micro-interações
 
-As cores estão centralizadas em variáveis CSS no topo de `style.css`
-(bloco `:root`), extraídas provisoriamente do logo (terracota + creme).
-Basta editar os valores lá para atualizar a identidade visual em toda a
-página de uma vez.
+- Cursor customizado discreto (desktop)
+- Botões com leve efeito magnético
+- Fade-in suave ao rolar a página
+- Barra de progresso de leitura no topo
+- Tudo respeita `prefers-reduced-motion` e degrada bem em touch/mobile
 
 ## Deploy na Vercel
 
