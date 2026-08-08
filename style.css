@@ -119,6 +119,23 @@ body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; }
    Intro (topo da página, sem cabeçalho fixo)
    ========================================================================== */
 .intro-section { padding: 40px 0 8px; }
+.brand-mark {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--color-ink);
+  margin-bottom: 18px;
+}
+.brand-mark span {
+  display: block;
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-terracotta);
+  margin-top: 6px;
+}
 .eyebrow-label {
   font-size: 0.7rem;
   letter-spacing: 0.2em;
