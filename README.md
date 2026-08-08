@@ -18,14 +18,22 @@ substituindo o link da bio do Instagram (@encantosdecorr).
 6. **Faixa de estatísticas**
 7. **Faixa de fechamento** — CTA final, redes sociais e assinatura
 
+## Direção visual
+
+Sóbria e editorial, no espírito de uma marca boutique de decoração: tons
+terracota/creme silenciosos, tipografia serif (Fraunces) para títulos,
+ícones de linha finos (sem emoji), fotos com um leve tratamento de cor
+unificado, textura de papel muito sutil no fundo e nada de gradientes
+berrantes ou efeitos piscantes — a interatividade é discreta, não é o
+protagonista.
+
 ## Destaques interativos
 
-- **Cartões de produto com flip 3D**: toque/clique em cada categoria para
-  virar o cartão e revelar a descrição e as tags da linha
-- **Spotlight**: brilho que segue o cursor sobre os cartões (desktop)
-- **Cursor customizado** com anel que reage ao passar sobre links e cartões
-- **Botões magnéticos** nos links e CTAs principais
-- **Sparkles** ao passar o mouse no link do Grupo VIP
+- **Cartões de produto com flip**: toque/clique em cada categoria para
+  virar o cartão e revelar a descrição, o ícone e as tags da linha
+- **Spotlight**: brilho sutil que segue o cursor sobre os cartões (desktop)
+- **Cursor customizado** discreto, com anel fino que reage sobre links
+- **Botões magnéticos** bem sutis nos links e CTAs principais
 - **Contadores animados** nas estatísticas (sobem ao entrar na tela)
 - **Barra de progresso** de leitura no topo
 - Tudo respeita `prefers-reduced-motion` e degrada bem em touch/mobile
