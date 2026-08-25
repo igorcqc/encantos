@@ -6,31 +6,33 @@
 :root {
   /* --- cores extraídas do logo --- */
   --color-terracotta: #a8462c;
-  --color-terracotta-dark: #833a25;
+  --color-terracotta-dark: #7a3a24;
   --color-terracotta-light: #c17451;
 
   /* --- neutros aconchegantes --- */
-  --color-cream: #faf3ea;
-  --color-cream-soft: #f3e7d8;
-  --color-ink: #3a2c22;
-  --color-ink-soft: #6b5847;
+  --color-cream: #f7f1e6;
+  --color-cream-soft: #efe4d3;
+  --color-ink: #34281f;
+  --color-ink-soft: #6d5c4c;
 
   /* --- accent provisório (sálvia suave / dourado) --- */
-  --color-sage: #8a9a7e;
-  --color-gold: #c79a4b;
+  --color-sage: #7c8c70;
+  --color-gold: #a9803f;
 
-  --color-white: #ffffff;
+  --color-white: #fffdf9;
+  --color-line: rgba(52, 40, 31, 0.14);
 
   /* --- tipografia --- */
   --font-serif: "Fraunces", "Cormorant Garamond", Georgia, serif;
   --font-sans: "Jost", "Helvetica Neue", Arial, sans-serif;
 
   /* --- espaçamento / forma --- */
-  --radius-sm: 10px;
-  --radius-md: 18px;
-  --radius-lg: 28px;
-  --shadow-soft: 0 12px 32px rgba(58, 44, 34, 0.12);
-  --max-width: 1120px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --shadow-soft: 0 10px 30px rgba(52, 40, 31, 0.08);
+  --shadow-card: 0 18px 48px rgba(52, 40, 31, 0.1);
+  --max-width-narrow: 640px;
 }
 
 /* ==========================================================================
@@ -38,484 +40,308 @@
    ========================================================================== */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 
 body {
   font-family: var(--font-sans);
   background: var(--color-cream);
   color: var(--color-ink);
-  line-height: 1.6;
+  line-height: 1.65;
   font-weight: 300;
   overflow-x: hidden;
+  position: relative;
+}
+
+/* textura de papel muito sutil — evita a sensação "plástica" de fundo liso */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.2  0 0 0 0 0.16  0 0 0 0 0.12  0 0 0 0.02 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 img { max-width: 100%; display: block; }
-
 a { color: inherit; text-decoration: none; }
 
 .container {
-  max-width: var(--max-width);
+  max-width: var(--max-width-narrow);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 22px;
+  position: relative;
+  z-index: 1;
 }
 
-h1, h2, h3 {
+h1, h2 {
   font-family: var(--font-serif);
   font-weight: 500;
   color: var(--color-ink);
+  letter-spacing: -0.01em;
 }
+
+.center { text-align: center; }
+
+/* ==========================================================================
+   Cursor customizado — discreto
+   ========================================================================== */
+.cursor-dot, .cursor-ring {
+  position: fixed; top: 0; left: 0; pointer-events: none;
+  border-radius: 50%; z-index: 999; opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.cursor-dot { width: 4px; height: 4px; background: var(--color-ink); transform: translate(-50%, -50%); }
+.cursor-ring {
+  width: 28px; height: 28px;
+  border: 1px solid rgba(52, 40, 31, 0.35);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease, width 0.25s ease, height 0.25s ease, border-color 0.25s ease;
+}
+body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
+body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; }
+.cursor-ring.is-active { width: 42px; height: 42px; border-color: var(--color-gold); }
+
+/* ==========================================================================
+   Barra de progresso
+   ========================================================================== */
+.progress-bar { position: fixed; top: 0; left: 0; width: 100%; height: 2px; z-index: 60; background: rgba(52, 40, 31, 0.06); }
+.progress-bar span { display: block; height: 100%; width: 0%; background: var(--color-terracotta); transition: width 0.1s linear; }
 
 /* ==========================================================================
    Fade-in on scroll
    ========================================================================== */
-.fade-in {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.fade-in.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.fade-in.is-visible { opacity: 1; transform: translateY(0); }
 
 /* ==========================================================================
-   Header
+   Intro (topo da página, sem cabeçalho fixo)
    ========================================================================== */
-.site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 50;
-  background: rgba(250, 243, 234, 0.75);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: box-shadow 0.3s ease;
-}
-.site-header.scrolled {
-  box-shadow: 0 2px 16px rgba(58, 44, 34, 0.08);
-}
-.header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 14px;
-  padding-bottom: 14px;
-}
+.intro-section { padding: 40px 0 8px; }
 .brand-mark {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 1.4rem;
-  color: var(--color-terracotta);
-  letter-spacing: 0.02em;
+  font-size: 1.5rem;
+  line-height: 1.1;
+  color: var(--color-ink);
 }
-
-.btn-mini {
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  border: 1px solid var(--color-terracotta);
-  color: var(--color-terracotta);
-  padding: 8px 16px;
-  border-radius: 999px;
-  transition: background 0.25s ease, color 0.25s ease;
-}
-.btn-mini:hover {
-  background: var(--color-terracotta);
-  color: var(--color-white);
-}
-
-/* ==========================================================================
-   Hero
-   ========================================================================== */
-.hero {
-  position: relative;
-  min-height: 100svh;
-  display: flex;
-  align-items: flex-end;
-  overflow: hidden;
-}
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  will-change: transform;
-}
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(58, 34, 24, 0.15) 0%,
-    rgba(58, 34, 24, 0.35) 55%,
-    rgba(43, 26, 18, 0.82) 100%
-  );
-}
-.hero-content {
-  position: relative;
-  z-index: 2;
-  color: var(--color-white);
-  padding-bottom: 96px;
-  padding-top: 140px;
-}
-.eyebrow {
-  font-size: 0.78rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-cream-soft);
-  margin-bottom: 18px;
-}
-.hero-title {
-  font-size: clamp(3rem, 10vw, 5.5rem);
-  line-height: 0.95;
-  font-style: italic;
-  color: var(--color-white);
-}
-.hero-title-sub {
+.brand-mark span {
   display: block;
-  font-size: clamp(1.1rem, 3vw, 1.6rem);
-  font-style: normal;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
   font-family: var(--font-sans);
-  font-weight: 400;
-  margin-top: 8px;
-  color: var(--color-cream-soft);
+  font-style: normal;
+  font-size: 0.6rem;
+  line-height: 1;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-terracotta);
+  margin-top: 2px;
 }
 .hero-tagline {
-  font-family: var(--font-serif);
-  font-size: clamp(1.2rem, 3vw, 1.6rem);
-  font-style: italic;
-  margin-top: 24px;
-  color: var(--color-gold);
-}
-.hero-desc {
-  max-width: 480px;
   margin-top: 14px;
-  color: var(--color-cream-soft);
-  font-size: 1rem;
-}
-
-.btn {
-  display: inline-block;
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 16px 34px;
-  border-radius: 999px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-}
-.btn-primary {
-  margin-top: 34px;
-  background: var(--color-terracotta);
-  color: var(--color-white);
-  box-shadow: var(--shadow-soft);
-}
-.btn-primary:hover {
-  background: var(--color-terracotta-dark);
-  transform: translateY(-2px);
-}
-
-.scroll-cue {
-  position: absolute;
-  bottom: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  width: 26px;
-  height: 42px;
-  border: 2px solid rgba(255,255,255,0.6);
-  border-radius: 999px;
-}
-.scroll-cue span {
-  position: absolute;
-  top: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 4px;
-  height: 8px;
-  border-radius: 999px;
-  background: var(--color-white);
-  animation: scrollcue 1.8s ease-in-out infinite;
-}
-@keyframes scrollcue {
-  0% { opacity: 1; top: 8px; }
-  70% { opacity: 0; top: 20px; }
-  100% { opacity: 0; top: 20px; }
-}
-
-/* ==========================================================================
-   Section shared styles
-   ========================================================================== */
-section { padding: 96px 0; }
-
-.section-eyebrow {
-  font-size: 0.78rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-sage);
-  margin-bottom: 10px;
-}
-.section-title {
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-family: var(--font-serif);
   font-style: italic;
-  max-width: 640px;
-}
-.section-desc {
-  max-width: 560px;
-  margin-top: 16px;
-  color: var(--color-ink-soft);
-}
-.center { text-align: center; margin-left: auto; margin-right: auto; }
-
-/* ==========================================================================
-   Vitrine de produtos
-   ========================================================================== */
-.showcase { background: var(--color-cream); }
-
-.showcase-grid {
-  margin-top: 48px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
-}
-.product-card {
-  position: relative;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  aspect-ratio: 3 / 4;
-  box-shadow: var(--shadow-soft);
-}
-.product-img-wrap {
-  position: absolute;
-  inset: 0;
-}
-.product-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-}
-.product-card:hover .product-img-wrap img {
-  transform: scale(1.06);
-}
-.product-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(58,34,24,0) 45%, rgba(43,26,18,0.75) 100%);
-}
-.product-card h3 {
-  position: absolute;
-  left: 20px;
-  bottom: 16px;
-  z-index: 2;
-  color: var(--color-white);
-  font-style: italic;
-  font-size: 1.3rem;
-}
-.product-card:nth-child(5) {
-  grid-column: span 2;
-}
-
-/* ==========================================================================
-   Loja física e online
-   ========================================================================== */
-.dual-store {
-  background: var(--color-terracotta);
-  color: var(--color-white);
-}
-.dual-store .section-eyebrow { color: var(--color-cream-soft); }
-.dual-store .section-title { color: var(--color-white); }
-.dual-store .section-desc { color: rgba(255,255,255,0.85); }
-
-.dual-store-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-.dual-store-badges {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-.badge-card {
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: var(--radius-md);
-  padding: 28px 20px;
-  text-align: center;
-}
-.badge-icon {
-  font-size: 2rem;
-  display: block;
-  margin-bottom: 10px;
-}
-.badge-card h3 {
-  color: var(--color-white);
   font-size: 1.15rem;
-  font-style: italic;
-}
-.badge-card p {
-  color: rgba(255,255,255,0.8);
-  font-size: 0.9rem;
-  margin-top: 4px;
+  color: var(--color-terracotta);
 }
 
 /* ==========================================================================
-   Destinos / CTAs
+   Links principais
    ========================================================================== */
-.destinos { background: var(--color-cream-soft); }
+.links-section { padding: 28px 0 8px; }
 
-.destinos-grid {
-  margin-top: 48px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 18px;
-}
-
-.cta-card {
+.link-stack { display: flex; flex-direction: column; }
+.link-row {
   position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background: var(--color-white);
-  border-radius: var(--radius-lg);
-  padding: 32px 28px;
-  box-shadow: var(--shadow-soft);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  border: 1px solid rgba(168, 70, 44, 0.08);
+  align-items: center;
+  gap: 14px;
+  padding: 17px 4px;
+  border-top: 1px solid var(--color-line);
+  color: var(--color-ink);
+  transition: padding-left 0.3s ease, color 0.3s ease;
+  will-change: transform;
 }
-.cta-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 40px rgba(58, 44, 34, 0.16);
+.link-stack .link-row:last-child { border-bottom: 1px solid var(--color-line); }
+.link-row:hover { padding-left: 8px; color: var(--color-terracotta); }
+.link-icon {
+  position: relative;
+  flex: 0 0 auto; width: 22px; height: 22px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-terracotta);
 }
-.cta-icon {
-  font-size: 1.8rem;
-  margin-bottom: 14px;
+.link-icon-pulse {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: var(--color-terracotta);
+  opacity: 0;
+  animation: icon-push 2.2s ease-out infinite;
+  pointer-events: none;
 }
-.cta-card h3 {
-  font-size: 1.3rem;
-  font-style: italic;
-  margin-bottom: 8px;
+@keyframes icon-push {
+  0% { transform: scale(0.6); opacity: 0.35; }
+  70% { transform: scale(1.45); opacity: 0; }
+  100% { transform: scale(1.45); opacity: 0; }
 }
-.cta-card p {
+.link-text { display: flex; flex-direction: column; line-height: 1.3; flex: 1; }
+.link-text strong { font-family: var(--font-serif); font-size: 1.02rem; font-weight: 500; color: inherit; }
+.link-text em { font-style: normal; font-size: 0.75rem; color: var(--color-ink-soft); }
+.link-arrow {
+  flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: center;
   color: var(--color-ink-soft);
-  font-size: 0.92rem;
+  opacity: 0.6;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.link-row:hover .link-arrow { opacity: 1; transform: translateX(2px); color: var(--color-terracotta); }
+.link-vip {
+  background: linear-gradient(90deg, rgba(168,70,44,0.07), transparent 70%);
+  padding-left: 10px;
+  overflow: hidden;
+}
+.link-vip:hover { padding-left: 14px; }
+.link-vip .link-text strong::after {
+  content: "";
+  display: inline-block;
+  width: 5px; height: 5px;
+  margin-left: 8px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  vertical-align: middle;
+}
+
+/* ==========================================================================
+   Vídeo
+   ========================================================================== */
+.hero-video-section { padding: 28px 0 56px; }
+.video-hook {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--color-ink);
   margin-bottom: 18px;
 }
-.cta-arrow {
-  margin-top: auto;
-  font-size: 0.82rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--color-terracotta);
-  font-weight: 500;
+
+.video-wrap {
+  margin: 0 auto;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-card);
+  background: var(--color-ink);
+}
+.hero-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--color-ink);
 }
 
-.cta-vip {
-  background: linear-gradient(135deg, var(--color-terracotta) 0%, var(--color-terracotta-dark) 100%);
-  color: var(--color-white);
-  border: none;
-  order: -1;
+/* variante retrato — vídeo vertical (Reels/Stories) */
+.video-wrap--vertical {
+  max-width: 380px;
+  max-height: 78vh;
 }
-.cta-vip .cta-arrow { color: var(--color-gold); }
-.cta-vip p { color: rgba(255,255,255,0.88); }
-.cta-tag {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  background: var(--color-gold);
-  color: var(--color-terracotta-dark);
-  font-size: 0.68rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 5px 12px;
-  border-radius: 999px;
-  font-weight: 600;
+.video-wrap--vertical .hero-video {
+  aspect-ratio: 9 / 16;
+  max-height: 78vh;
+  object-fit: contain;
 }
 
 /* ==========================================================================
-   Footer
+   Dúvidas frequentes
    ========================================================================== */
-.site-footer {
+.faq-section { padding: 8px 0 56px; }
+.section-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 10px;
+}
+.section-title { font-size: clamp(1.5rem, 4vw, 1.9rem); font-style: italic; }
+
+.faq-list { margin-top: 26px; }
+.faq-item { border-top: 1px solid var(--color-line); }
+.faq-list .faq-item:last-child { border-bottom: 1px solid var(--color-line); }
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 17px 4px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  font-family: var(--font-serif);
+  font-size: 0.98rem;
+  color: var(--color-ink);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-icon {
+  flex: 0 0 auto;
+  width: 20px; height: 20px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-terracotta);
+  font-size: 0.9rem;
+  font-family: var(--font-sans);
+  transition: transform 0.3s ease;
+}
+.faq-item[open] .faq-icon { transform: rotate(45deg); }
+.faq-item p {
+  padding: 0 4px 18px;
+  color: var(--color-ink-soft);
+  font-size: 0.9rem;
+  animation: faq-in 0.3s ease;
+}
+@keyframes faq-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ==========================================================================
+   Fechamento
+   ========================================================================== */
+.closing-section { padding-bottom: 64px; }
+.closing-band {
   background: var(--color-ink);
   color: var(--color-cream-soft);
-  padding: 56px 0 32px;
+  border-radius: var(--radius-xl);
+  padding: 48px 26px;
   text-align: center;
 }
-.footer-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-.footer-brand {
-  font-size: 1.6rem;
-  color: var(--color-white);
-}
-.footer-brand span {
-  font-style: normal;
-}
-.footer-tagline {
-  color: var(--color-gold);
+.closing-title {
   font-family: var(--font-serif);
   font-style: italic;
+  font-size: clamp(1.25rem, 4vw, 1.6rem);
+  color: var(--color-white);
 }
-.footer-socials {
-  display: flex;
-  gap: 20px;
-  margin-top: 12px;
-}
+.closing-sub { margin-top: 10px; font-size: 0.86rem; color: rgba(247, 241, 230, 0.75); }
+.closing-sub strong { color: var(--color-gold); font-weight: 500; }
+.footer-socials { display: flex; justify-content: center; gap: 16px; margin-top: 24px; }
 .footer-socials a {
-  color: var(--color-cream-soft);
-  transition: color 0.25s ease;
+  width: 38px; height: 38px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(247, 241, 230, 0.25);
+  color: rgba(247, 241, 230, 0.8);
+  transition: color 0.25s ease, border-color 0.25s ease;
 }
-.footer-socials a:hover {
-  color: var(--color-gold);
-}
-.footer-copy {
-  margin-top: 18px;
-  font-size: 0.82rem;
-  color: rgba(250, 243, 234, 0.5);
+.footer-socials a:hover { color: var(--color-gold); border-color: var(--color-gold); }
+.closing-signature { margin-top: 32px; font-family: var(--font-serif); font-style: italic; font-size: 1.1rem; color: var(--color-white); }
+.closing-copy { margin-top: 6px; font-size: 0.68rem; color: rgba(247, 241, 230, 0.45); }
+
+/* ==========================================================================
+   Responsivo
+   ========================================================================== */
+@media (min-width: 720px) {
+  .intro-section { padding-top: 56px; }
+  .link-row { padding: 19px 6px; }
 }
 
 /* ==========================================================================
-   Responsivo — tablet e desktop
+   Reduced motion / dispositivos de toque
    ========================================================================== */
-@media (min-width: 640px) {
-  .destinos-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .cta-vip { grid-column: span 2; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fade-in { transition: none; }
+  .link-icon-pulse { animation: none; opacity: 0; }
 }
-
-@media (min-width: 860px) {
-  .dual-store-inner {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .dual-store-text { flex: 1.1; }
-  .dual-store-badges { flex: 1; }
-}
-
-@media (min-width: 960px) {
-  .showcase-grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
-  .product-card:nth-child(5) {
-    grid-column: span 1;
-  }
-  .destinos-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  .cta-vip { grid-column: span 2; }
-}
-
-@media (min-width: 1200px) {
-  .hero-content { padding-bottom: 130px; }
+@media (hover: none) {
+  .cursor-dot, .cursor-ring { display: none; }
 }

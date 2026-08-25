@@ -1,19 +1,27 @@
 # Encantos Home&Decor — Landing Page
 
-Página única (one-page) que funciona como vitrine de produtos + hub de links,
-substituindo o link da bio do Instagram (@encantosdecorr).
-
-## Stack
-
-HTML, CSS e JavaScript puro — sem build, sem framework. Pronta para publicar
-direto na Vercel (ou qualquer host de arquivos estáticos).
+Página única (one-page), objetiva por design: vídeo institucional no topo,
+botões de link logo abaixo e direto para as dúvidas frequentes. Pensada
+para funcionar como página "coringa" — link da bio, anúncios, Google Meu
+Negócio — sem depender de contexto extra.
 
 ## Estrutura
 
-- `index.html` — marcação da página
-- `style.css` — estilos e variáveis de marca (cores, fontes)
-- `script.js` — fade-in no scroll, parallax leve no hero, ano dinâmico no rodapé
-- `vercel.json` — configuração mínima de deploy
+1. **Vídeo institucional** — hero com player nativo (controles do próprio
+   navegador, sem autoplay forçado)
+2. **Links principais** — Grupo VIP, Loja física, Fale conosco, Instagram
+3. **Dúvidas frequentes** — acordeão nativo (`<details>`)
+4. **Fechamento** — CTA final, redes sociais e assinatura
+
+## Vídeo institucional
+
+O vídeo já está em `video/snapinsta-1786212534136.mp4` (vertical, 9:16 —
+formato Reels/Stories) e o player em `index.html`/`style.css` está
+ajustado pro formato retrato. Veja `video/README.md` para trocar por
+outro arquivo depois.
+
+A imagem de capa (`poster`) que aparece antes do play está marcada com o
+comentário `TROCAR PELA IMAGEM DE CAPA DO VÍDEO` em `index.html`.
 
 ## Antes de publicar: preencher os placeholders
 
@@ -26,25 +34,26 @@ Busque por estes marcadores em `index.html` e substitua pelos links reais:
 | `[LINK_GOOGLE_MAPS]` | Localização da loja física em Macaé/RJ |
 | `[LINK_INSTAGRAM]` | `https://www.instagram.com/encantosdecorr/` |
 
-## Trocar as fotos dos produtos
+## Atenção: conteúdo de exemplo
 
-As 5 imagens da seção "Vitrine de produtos" são placeholders de banco de
-imagens (Unsplash), marcados no código com o comentário:
+As respostas da seção **Dúvidas frequentes** foram escritas como sugestão
+de tom de voz — revise/ajuste com a cliente antes de publicar (prazos de
+entrega, política de troca etc. podem variar).
 
-```html
-<!-- TROCAR PELA FOTO REAL DO PRODUTO -->
-```
+## Direção visual
 
-Basta trocar o `src` de cada `<img>` pela foto real do produto quando
-estiver disponível. A imagem de fundo do Hero também está marcada da mesma
-forma.
+Sóbria e editorial: tons terracota/creme, tipografia serif (Fraunces) nos
+títulos, ícones de linha finos, textura de papel muito sutil no fundo.
+Paleta centralizada em variáveis CSS no topo de `style.css` (bloco
+`:root`) — fácil de ajustar quando a identidade final estiver fechada.
 
-## Paleta de cores
+## Micro-interações
 
-As cores estão centralizadas em variáveis CSS no topo de `style.css`
-(bloco `:root`), extraídas provisoriamente do logo (terracota + creme).
-Basta editar os valores lá para atualizar a identidade visual em toda a
-página de uma vez.
+- Cursor customizado discreto (desktop)
+- Botões com leve efeito magnético
+- Fade-in suave ao rolar a página
+- Barra de progresso de leitura no topo
+- Tudo respeita `prefers-reduced-motion` e degrada bem em touch/mobile
 
 ## Deploy na Vercel
 
