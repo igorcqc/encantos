@@ -86,6 +86,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* ---------- Meta Pixel: rastreamento de cliques nos links ---------- */
+  const STANDARD_FB_EVENTS = ["Lead", "Contact", "FindLocation"];
+  document.querySelectorAll("[data-fb-event]").forEach((el) => {
+    el.addEventListener("click", () => {
+      if (typeof fbq !== "function") return;
+      const eventName = el.dataset.fbEvent;
+      const params = { content_name: el.dataset.fbLabel || eventName };
+      if (STANDARD_FB_EVENTS.includes(eventName)) {
+        fbq("track", eventName, params);
+      } else {
+        fbq("trackCustom", eventName, params);
+      }
+    });
+  });
+
   /* ---------- Botões magnéticos (sutil, sem exagero) ---------- */
   if (hasFinePointer && !prefersReducedMotion) {
     document.querySelectorAll(".magnetic").forEach((el) => {
